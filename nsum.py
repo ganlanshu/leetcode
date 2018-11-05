@@ -13,9 +13,9 @@ class Solution(object):
         if length < N:
             return []
         # 假设nums已经排好序了
-        if nums[0] * length > target:
+        if nums[0] * N > target:
             return []
-        if nums[-1] * length < target:
+        if nums[-1] * N < target:
             return []
         if N == 1:
             for i in range(length):
@@ -23,7 +23,6 @@ class Solution(object):
                     return [nums[i]]
             return []
         elif N == 2:
-            print 'hit'
             begin, end = 0, length - 1
             result = []
             while begin < end:
@@ -44,8 +43,8 @@ class Solution(object):
         else:
             results = []
             for i in range(length-N+1):
-                # 如果第一个数就大,后面的和肯定更大
-                if nums[i] * N > target:
+                # 如果第一个数就大,后面的和肯定更大,最后一个同理
+                if nums[i] * N > target or nums[-1] * N < target:
                     break
                 # 第一个数字不能有重复的
                 if i > 0 and nums[i] == nums[i-1]:
@@ -70,14 +69,6 @@ class Solution(object):
 
 if __name__ == '__main__':
     o = Solution()
-    nums = [8,9,0,-1,7,-9,-3,1,2,4]
+    nums = [-1,2,2,-5,0,-1,4]
     nums.sort()
-    print nums
-    target = 0
-    print o.nsum(4, nums, 2)
-
-
-
-
-
-
+    print o.nsum(4, nums, 3)
