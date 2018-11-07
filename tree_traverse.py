@@ -40,8 +40,29 @@ class Solution(object):
                 stack.append(root)
                 root = root.left
             if stack:
-                top = stack[-1]
-                stack.pop()
+                top = stack.pop()
                 res.append(top.val)
                 root = top.right
+        return res
+
+    def level_traversal(self, root):
+        """
+        :param root: TreeNode
+        :return: List[int]
+        层序遍历,用队列实现
+        """
+        if not root:
+            return []
+        res = []
+        queue = []
+        queue.append(root)
+        while queue:
+            head = queue.pop(0)
+            left = head.left
+            right = head.right
+            if left:
+                queue.append(left)
+            if right:
+                queue.append(right)
+            res.append(head.val)
         return res
