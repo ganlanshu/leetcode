@@ -18,7 +18,7 @@ class Solution(object):
                 return
             # 从前序获取根结点
             root_val = preorder.popleft()
-            root = TreeNode(root)
+            root = TreeNode(root_val)
             index = inorder.index(root_val)
             left = helper(preorder, inorder[:index])
             right = helper(preorder, inorder[index+1:])
