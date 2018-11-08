@@ -27,5 +27,18 @@ class Solution(object):
             return root
         return helper(deque(preorder), inorder)
 
-
-
+    def build_tree(self, inorder, postorder):
+        """
+        用后序中序构建tree
+        :param inorder:
+        :param postorder:
+        :return:
+        """
+        if not inorder:
+            return
+        root_val = postorder.pop()
+        root = TreeNode(root_val)
+        index = inorder.index(root_val)
+        root.right = self.build_tree(inorder[index+1:], postorder)
+        root.left = self.build_tree(inorder[:index], postorder)
+        return root
