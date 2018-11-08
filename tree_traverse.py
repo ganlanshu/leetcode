@@ -99,3 +99,24 @@ class Solution(object):
                 res.append(level_list)
                 level_list = []
         return res
+
+    def level_traversal(self, root):
+        """
+        :param root:
+        :return:
+        """
+        if not root:
+            return []
+        queue = [[root]]
+        for level in queue:
+            record = []
+            for node in level:
+                if node.left:
+                    record.append(node.left)
+                if node.right:
+                    record.append(node.right)
+            if record:
+                queue.append(record)
+        return [[node.val for node in level] for level in queue]
+
+
