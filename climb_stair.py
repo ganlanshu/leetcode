@@ -19,3 +19,13 @@ class Solution(object):
             f0 = f1
             f1 = fn
         return fn
+
+    def climbStairs_fibnacci(self, n):
+        """
+        利用斐波那契数列的通项公式
+        https://blog.csdn.net/zbl_scnu/article/details/16806325
+        :param n:
+        :return:
+        """
+        fibn = int(1/math.sqrt(5) * (((1+math.sqrt(5))/2)**(n+1) - ((1-math.sqrt(5))/2)**(n+1)))
+        return fibn
