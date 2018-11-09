@@ -43,3 +43,26 @@ class Solution(object):
         if n == 0:
             return 0
         return 2**(n-1)
+
+
+    def minCostClimbingStairs(self, cost):
+        """
+        用最小成本爬梯子
+        https://leetcode.com/problems/min-cost-climbing-stairs
+        :type cost: List[int]
+        :rtype: int
+        """
+        n = len(cost)
+        if n == 1:
+            return cost[0]
+        if n == 2:
+            return min(cost[0], cost[-1])
+
+        f0, f1 = 0, cost[n-1]
+        for i in range(n-2, 0, -1):
+            fi = cost[i] + min(f0, f1)
+            f0 = f1
+            f1 = fi
+        # 最后比较index为0和1的，取最小值
+        f0 = cost[0] + min(f0, f1)
+        return min(f0, fi)
