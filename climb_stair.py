@@ -29,3 +29,17 @@ class Solution(object):
         """
         fibn = int(1/math.sqrt(5) * (((1+math.sqrt(5))/2)**(n+1) - ((1-math.sqrt(5))/2)**(n+1)))
         return fibn
+
+    def climb_n_stairs(self, n):
+        """
+        一只青蛙一次可以跳上1级台阶，也可以跳上2级……它也可以跳上n级。
+        求该青蛙跳上一个n级的台阶总共有多少种跳法
+        从 n=1 开始推导
+        后面每一次的都是前面所有的和加1
+        最后发现是一个等比数列
+        :param n:
+        :return:
+        """
+        if n == 0:
+            return 0
+        return 2**(n-1)
