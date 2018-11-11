@@ -22,3 +22,9 @@ class Solution(object):
             max_sum = max(dpi, max_sum)
         return max_sum
 
+    def max_subarray(self, nums):
+        # 这个是讨论里看到的,觉得很好
+        for i in range(1, len(nums)):
+            if nums[i-1] > 0:
+            nums[i] += nums[i-1]
+        return max(nums)
