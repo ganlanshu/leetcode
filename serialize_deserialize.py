@@ -1,4 +1,5 @@
 #coding=utf-8
+from collections import deque
 
 # Definition for a binary tree node.
 class TreeNode(object):
@@ -38,8 +39,6 @@ class Codec:
         """
         node_list = data.split(' ')
         def _deserialize(self, node_list):
-            if not node_list:
-                return
             root_val = node_list.pop(0)
             if root_val != '#':
                 root = TreeNode(int(root_val))
@@ -48,5 +47,5 @@ class Codec:
             else:
                 return None
             return root
-        return _deserialize(node_list)
+        return _deserialize(deque(node_list))
 
