@@ -38,8 +38,8 @@ class Codec:
         :rtype: TreeNode
         """
         node_list = data.split(' ')
-        def _deserialize(self, node_list):
-            root_val = node_list.pop(0)
+        def _deserialize(node_list):
+            root_val = node_list.popleft()
             if root_val != '#':
                 root = TreeNode(int(root_val))
                 root.left = _deserialize(node_list)
