@@ -85,7 +85,7 @@ class Solution(object):
         level_list = []
         while queue:
             head = queue.pop(0)
-            if head:#head是树中的某个结点
+            if head:  #head是树中的某个结点
                 left = head.left
                 right = head.right
                 if left:
@@ -118,5 +118,3 @@ class Solution(object):
             if record:
                 queue.append(record)
         return [[node.val for node in level] for level in queue]
-
-
