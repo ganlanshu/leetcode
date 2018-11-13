@@ -76,12 +76,11 @@ class Solution(object):
             while root:
                 stack.append(root)
                 root = root.left
-            if stack:
-                top = stack.pop()
-                if pre and top.val <= pre.val:
-                    return False
-                pre = top
-                root = top.right
+            top = stack.pop()
+            if pre and top.val <= pre.val:
+                return False
+            pre = top
+            root = top.right
         return True
 
     def isValidBST3(self, root):
