@@ -85,7 +85,8 @@ class Solution(object):
         level_list = []
         while queue:
             head = queue.pop(0)
-            if head:  #head是树中的某个结点
+            #head是树中的某个结点
+            if head:
                 left = head.left
                 right = head.right
                 if left:
@@ -99,6 +100,28 @@ class Solution(object):
                 res.append(level_list)
                 level_list = []
         return res
+
+    def level_traversal_with_level1(self, root):
+        if not root:
+            return []
+        queue = []
+        res = []
+        queue.append(root)
+        while queue:
+            size = len(queue)
+            level = []
+            for i in range(size):
+                head = queue.pop(0)
+                level.append(head.val)
+                left = head.left
+                right = head.right
+                if left:
+                    queue.append(left)
+                if right:
+                    queue.append(right)
+            res.append(level)
+        return res
+
 
     def level_traversal(self, root):
         """
