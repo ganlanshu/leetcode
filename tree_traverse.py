@@ -141,3 +141,41 @@ class Solution(object):
             if record:
                 queue.append(record)
         return [[node.val for node in level] for level in queue]
+
+    def preorder_traversal(self, root):
+        """
+        用iter方法实现
+        :param root:
+        :return:
+        """
+        if not root:
+            return []
+        res = []
+        stack = []
+        while root or stack:
+            while root:
+                res.append(root.val)
+                stack.push(root)
+                root = root.left
+            top = stack.pop()
+            root = top.right
+        return res
+
+    def preorder_traversal_recursion(self, root):
+        if not root:
+            return []
+        return [root.val] + self.preorder_traversal_recursion(root.left) + self.preorder_traversal_recursion(root.right)
+
+    def preorder_traversal1(self, root):
+        if not root:
+            return []
+        res = []
+        stack = [root]
+        while stack:
+            top = stack.pop()
+            res.append(top.val)
+            if top.right:
+                stack.append(top.right)
+            if top.left:
+                stack.append(top.left)
+        return res
