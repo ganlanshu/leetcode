@@ -83,3 +83,16 @@ class Solution(object):
                 pre = top
                 root = top.right
         return True
+
+    def isValidBST3(self, root):
+        pre = None
+        def _validate_bst(self, root, pre):
+            if not root:
+                return True
+            if not _validate_bst(root.left, pre):
+                return False
+            if pre and pre.val >= root.val:
+                return False
+            pre = root
+            return _validate_bst(root.right, pre)
+        return _validate_bst(root, pre)
