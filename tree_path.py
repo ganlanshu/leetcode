@@ -58,3 +58,30 @@ class Solution(object):
             if top.left:
                 stack.append((top.left, _sum-top.val))
         return False
+
+    def pathSum(self, root, sum):
+        """
+        113. Path Sum II
+        Given a binary tree and a sum, find all root-to-leaf paths where each path's sum equals the given sum.
+        :param root:
+        :param sum:
+        :return:
+        """
+        if not root:
+            return []
+        children = [root.left, root.right]
+        if not any(children):
+            if root.val == sum:
+                return [[root.val]]
+            return []
+        path = []
+        if root.left:
+            left_path = self.pathSum(root.left, sum-root.val)
+            if left_path:
+                path.extend([[root.val] + p for p in left_path])
+        if root.right:
+            right_path = self.pathSum(root.right, sum-root.val)
+            if right_path:
+                path.extend([[root.val] + p for p in right_path])
+        return path
+
