@@ -179,3 +179,34 @@ class Solution(object):
             if top.left:
                 stack.append(top.left)
         return res
+
+    def level_zigzag_traversal(self, root):
+        """
+        之字形按层输出
+        :param root:
+        :return:
+        """
+        if not root:
+            return []
+        queue = deque([])
+        res = []
+        queue.append(root)
+        flag = False
+        while queue:
+            n = len(queue)
+            level = []
+            for i in range(n):
+                head = queue.popleft()
+                left = head.left
+                right = head.right
+                if left:
+                    queue.append(left)
+                if right:
+                    queue.append(right)
+                level.append(head.val)
+            if flag:
+                level.reverse()
+            flag = not flag
+            res.append(level)
+        return res
+
