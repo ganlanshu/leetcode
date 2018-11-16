@@ -1,6 +1,7 @@
 #coding=utf-8
 
 # Definition for a binary tree node.
+from collections import deque
 class TreeNode(object):
     def __init__(self, x):
         self.val = x
@@ -210,3 +211,28 @@ class Solution(object):
             res.append(level)
         return res
 
+    def levelOrderBottom(self, root):
+        """
+        Given a binary tree, return the bottom-up level order traversal of its nodes' values
+        :param root:
+        :return:
+        """
+        if not root:
+            return []
+        queue = deque([])
+        res = deque([])
+        queue.append(root)
+        while queue:
+            n = len(queue)
+            level = []
+            for i in range(n):
+                head = queue.popleft()
+                left = head.left
+                right = head.right
+                if left:
+                    queue.append(left)
+                if right:
+                    queue.append(right)
+                level.append(head.val)
+            res.appendleft(level)
+        return res
