@@ -49,3 +49,21 @@ class Solution(object):
                 return curr_b
             curr_b = curr_b.next
         return
+
+    def getIntersectionNode1(self, headA, headB):
+        """
+        参考
+        https://leetcode.com/problems/intersection-of-two-linked-lists/solution/
+        https://blog.csdn.net/u012162613/article/details/41560337
+        :param headA:
+        :param headB:
+        :return:
+        """
+        if not headA or not headB:
+            return
+        curr_a = headA
+        curr_b = headB
+        while curr_a is not curr_b:
+            curr_a = curr_a.next if curr_a else headB
+            curr_b = curr_b.next if curr_b else headA
+        return curr_a
