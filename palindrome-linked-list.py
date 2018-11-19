@@ -59,3 +59,31 @@ class Solution(object):
             fast = fast.next.next
             slow = slow.next
         return slow
+
+    def isPalindrome1(self, head):
+        link_vals = []
+        while head:
+            link_vals.append(head.val)
+            head = head.next
+        return link_vals == link_vals[::-1]
+
+    def isPalindrome2(self, head):
+        if not (head and head.next):
+            return True
+        fast = slow = head
+        while fast and fast.next:
+            fast = fast.next.next
+            slow = slow.next
+        left = head
+        right = None
+        while slow:
+            temp = slow.next
+            slow.next = right
+            right = slow
+            slow = temp
+        while right:
+            if left.val != right.val:
+                return False
+            left = left.next
+            right = right.next
+        return True
