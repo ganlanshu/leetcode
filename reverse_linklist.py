@@ -10,16 +10,33 @@ class ListNode:
 class Solution:
 
     # 返回从尾部到头部的列表值序列，例如[1,2,3]
-    def printListFromTailToHead(self, listNode):
-        # write code here
-        if not listNode or not listNode.next:
-            return listNode
+    def reverseList(self, head):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+        """
         pre = None
-        while listNode:
-            temp = listNode.next
-            listNode.next = pre
-            pre = listNode
-            listNode = temp
+        while head:
+            temp = head.next
+            head.next = pre
+            pre = head
+            head = temp
         return pre
 
+
+    def reverseList1(self, head):
+        """
+        递归方法反转链表
+        :type head: ListNode
+        :rtype: ListNode
+        """
+        if not head:
+            return None
+        if not head.next:
+            return head
+        reversed_second = self.reverseList(head.next)
+        new_node = head.next
+        new_node.next = head
+        head.next = None
+        return reversed_second
 
