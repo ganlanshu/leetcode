@@ -77,3 +77,22 @@ class Solution(object):
             meet_point = meet_point.next
         return meet_point
 
+    def detectCycle2(self, head):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+        """
+        if head is None or head.next is None:
+            return
+        fast = slow = head
+        # 找到快慢指针相遇的点
+        while fast and fast.next:
+            fast = fast.next.next
+            slow = slow.next
+            if fast == slow:
+                fast = head
+                while fast != slow:
+                    fast = fast.next
+                    slow = slow.next
+                return slow
+        return
