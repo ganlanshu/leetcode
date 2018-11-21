@@ -21,30 +21,29 @@ class Solution(object):
         """
         if not head:
             return
-        length = self.get_link_length(head)
+        length, end = self.get_link_length_and_end(head)
         if k >= length:
             k = k % length
         if k == 0:
             return head
-
         current = head
         count = 1
         while count < length - k:
             current = current.next
             count += 1
         new_head = current.next
-        current = new_head
-        while current:
-            pre = current
-            current = current.next
-        pre.next = head
+        current.next = None
+        end.next = head
         return new_head
 
-
-    def get_link_length(self, head):
+    def get_link_length_and_end(self, head):
+        if not head:
+            return 0, head
+        if not head.next:
+            return 1, head
         ptr = head
-        length = 0
-        while ptr:
+        length = 1
+        while ptr.next:
             length += 1
             ptr = ptr.next
-        return length
+        return length, ptr
