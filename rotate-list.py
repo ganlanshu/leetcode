@@ -22,8 +22,7 @@ class Solution(object):
         if not head:
             return
         length, end = self.get_link_length_and_end(head)
-        if k >= length:
-            k = k % length
+        k = k % length
         if k == 0:
             return head
         current = head
