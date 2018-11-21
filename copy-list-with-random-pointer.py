@@ -130,3 +130,19 @@ class Solution(object):
             ptr_old_list = ptr_old_list.next
             ptr_new_list = ptr_new_list.next
         return head_new
+
+    def copyRandomList3(self, head):
+        """
+        用递归方法,对next和random指针递归
+        :param head:
+        :return:
+        """
+        if not head:
+            return
+        if head in self.visited:
+            return self.visited[head]
+        node = RandomListNode(head.label)
+        self.visited[head] = node
+        node.next = self.copyRandomList3(head.next)
+        node.random = self.copyRandomList3(head.random)
+        return node
