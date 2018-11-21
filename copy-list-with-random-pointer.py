@@ -92,3 +92,41 @@ class Solution(object):
             new_node = new_node.next
 
         return self.visited[head]
+
+    def copyRandomList2(self, head):
+        """
+        把复制节点放在每一个源节点的后面
+        然后从头遍历新的链表,取出复制后的部分
+        解释参考链接
+        https://leetcode.com/problems/copy-list-with-random-pointer/solution/
+        :param head:
+        :return:
+        """
+        if not head:
+            return
+        current = head
+        # 复制原链表的每个节点,形成 A->A'->B->B'->C->C'
+        while current:
+            post = current.next
+            current_copy = RandomListNode(current.label)
+            current.next = current_copy
+            current_copy.next = post
+            current = post
+
+        # 修改复制节点的random指针,改为源节点的random指针的复制节点
+        current = head
+        while current:
+            if current.random:
+                current.next.random = current.random.next
+            current = current.next.next
+
+        # 从head链表里挑出复制出来的新节点
+        ptr_old_list = head # A->B->C
+        ptr_new_list = head.next # A'->B'->C'
+        head_new = head.next
+        while ptr_old_list:
+            ptr_old_list.next = ptr_old_list.next.next
+            ptr_new_list.next = ptr_new_list.next.next if ptr_new_list.next else None
+            ptr_old_list = ptr_old_list.next
+            ptr_new_list = ptr_new_list.next
+        return head_new
