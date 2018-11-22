@@ -64,3 +64,30 @@ class Solution(object):
             count += 1
             current = current.next
         return current
+
+    def removeNthFromEnd(self, head, n):
+        """
+        19. Remove Nth Node From End of List
+        two pass algorithm
+        :type head: ListNode
+        :type n: int
+        :rtype: ListNode
+        """
+        if not head or n <= 0:
+            return
+        dummy = ListNode(0)
+        dummy.next = head
+        length = 0
+        current = head
+        while current:
+            length += 1
+            current = current.next
+        if n > length:
+            return
+        length -= n
+        pre = dummy
+        while length > 0:
+            pre = pre.next
+            length -= 1
+        pre.next = pre.next.next
+        return dummy.next
