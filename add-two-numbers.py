@@ -76,7 +76,7 @@ class Solution(object):
 
     def addTwoNumbers2(self, l1, l2):
         """
-        445. Add Two Numbers II
+        445. Add Two Numbers II,借助数字来做,如果链表很长,会超出数字的最大值
         :type l1: ListNode
         :type l2: ListNode
         :rtype: ListNode
@@ -107,3 +107,76 @@ class Solution(object):
             length -= 1
             current = current.next
         return decimal_num
+
+    def addTwoNumbers2(self, l1, l2):
+        """
+        445. Add Two Numbers II
+        还借助数字
+        但无需取链表长度
+        :param l1:
+        :param l2:
+        :return:
+        """
+        if not l1:
+            return l2
+        if not l2:
+            return l1
+        x1 = x2 = 0
+        current = l1
+        while current:
+            x1 = x1*10 + current.val
+            current = current.next
+        current = l2
+        while current:
+            x2 = x2*10 + current.val
+            current = current.next
+        x = x1 + x2
+        if x == 0:
+            return ListNode(0)
+        tail = None
+        while x:
+            x, r = x//10, x % 10
+            node = ListNode(r)
+            node.next = tail
+            tail = node
+        return tail
+
+
+    def addTwoNumbers3(self, l1, l2):
+        """
+        用stack把l1和l2最后面的元素取出来
+        :param l1:
+        :param l2:
+        :return:
+        """
+        if not l1:
+            return l2
+        if not l2:
+            return l1
+        l1_stack = []
+        l2_stack = []
+        current = l1
+        while current:
+            l1_stack.append(current.val)
+            current = current.next
+            l1 = l1.next
+        current = l2
+        while current:
+            l2_stack.append(current.val)
+            current = current.next
+        greater_10 = 0
+        tail = None
+        while l1_stack or l2_stack:
+            x1 = l1_stack.pop() if l1_stack else 0
+            x2 = l2_stack.pop() if l2_stack else 0
+            x = x1 + x2 + greater_10
+            node = ListNode(x % 10)
+            node.next = tail
+            tail = node
+            greater_10 = x//10
+        if greater_10:
+            node = ListNode(1)
+            node.next = tail
+            tail = node
+        return tail
+
