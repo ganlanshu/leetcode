@@ -44,3 +44,32 @@ class Solution(object):
             current.next = node
         return dummy.next
 
+    def addTwoNumbers1(self, l1, l2):
+        """
+        参考solution里的写法
+        :type l1: ListNode
+        :type l2: ListNode
+        :rtype: ListNode
+        """
+        if not l1 and not l2:
+            return
+        greater_10 = 0
+        dummy = ListNode(0)
+        current = dummy
+        while l1 or l2:
+            l1_val = l1.val if l1 else 0
+            l2_val = l2.val if l2 else 0
+            sum_val = l1_val + l2_val
+            if l1:
+                l1 = l1.next
+            if l2:
+                l2 = l2.next
+            sum_val += greater_10
+            node = ListNode(sum_val % 10)
+            current.next = node
+            current = current.next
+            greater_10 = sum_val / 10
+
+        if greater_10:
+            current.next = ListNode(greater_10)
+        return dummy.next
