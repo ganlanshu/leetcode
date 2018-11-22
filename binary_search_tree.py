@@ -83,3 +83,20 @@ class Solution(object):
             return root
         return convert_list_to_bst(l, r)
 
+    def sortedListToBST1(self, head):
+        """
+        有序链表转化为bst
+        109. Convert Sorted List to Binary Search Tree
+        """
+        if not head:
+            return
+        if not head.next:
+            return TreeNode(head.val)
+        # 把链表转为list
+        link_list = []
+        while head:
+            link_list.append(head.val)
+            head = head.next
+        return self.sortedArrayToBST(link_list)
+
+
