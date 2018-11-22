@@ -46,3 +46,21 @@ class Solution(object):
             length += 1
             ptr = ptr.next
         return length, ptr
+
+    def FindKthToTail(self, head, k):
+        """
+        链表中倒数第k个结点,如果倒数第k不存在,就返回空,倒数第0也是空
+        :param head:
+        :return:
+        """
+        if not head or k <= 0:
+            return
+        length, end = self.get_link_length_and_end(head)
+        if k > length:
+            return
+        current = head
+        count = 0
+        while count < length-k:
+            count += 1
+            current = current.next
+        return current
