@@ -20,8 +20,15 @@ class Solution(object):
         dummy = ListNode(0)
         current = dummy
         great_10 = False
-        while l1 and l2:
-            val = l1.val + l2.val
+        while l1 or l2:
+            if l1 and l2:
+                val = l1.val + l2.val
+                l1 = l1.next
+                l2 = l2.next
+            else:
+                val = l1.val if l1 else l2.val
+                l1 = l1.next if l1 else None
+                l2 = l2.next if l2 else None
             if great_10:
                 val += 1
             if val >= 10:
@@ -30,28 +37,8 @@ class Solution(object):
             else:
                 great_10 = False
             node = ListNode(val)
-            l1 = l1.next
-            l2 = l2.next
             current.next = node
             current = current.next
-        l = l1 or l2
-        if l:
-            if not great_10:
-                current.next = l
-            else:
-                while l:
-                    val = l.val
-                    if great_10:
-                        val += 1
-                    if val >= 10:
-                        val -= 10
-                        great_10 = True
-                    else:
-                        great_10 = False
-                    node = ListNode(val)
-                    current.next = node
-                    current = current.next
-                    l = l.next
         if great_10:
             node = ListNode(1+0)
             current.next = node
