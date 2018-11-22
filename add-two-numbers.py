@@ -73,3 +73,37 @@ class Solution(object):
         if greater_10:
             current.next = ListNode(greater_10)
         return dummy.next
+
+    def addTwoNumbers2(self, l1, l2):
+        """
+        445. Add Two Numbers II
+        :type l1: ListNode
+        :type l2: ListNode
+        :rtype: ListNode
+        """
+        if not l1:
+            return l2
+        if not l2:
+            return l1
+        link_sum_string = str(self.link_to_decimal(l1) + self.link_to_decimal(l2))
+        dummy = ListNode(0)
+        pre = dummy
+        for i in link_sum_string:
+            node = ListNode((i))
+            pre.next = node
+            pre = pre.next
+        return dummy.next
+
+    def link_to_decimal(self, head):
+        current = head
+        length = 0
+        while current:
+            length += 1
+            current = current.next
+        decimal_num = 0
+        current = head
+        while length > 0:
+            decimal_num += current.val * 10 **(length-1)
+            length -= 1
+            current = current.next
+        return decimal_num
