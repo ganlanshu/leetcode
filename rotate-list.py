@@ -91,3 +91,28 @@ class Solution(object):
             length -= 1
         pre.next = pre.next.next
         return dummy.next
+
+    def removeNthFromEnd2(self, head, n):
+        """
+        one pass algorithm
+        Maintain two pointers and update one with a delay of n steps.
+        :param head:
+        :param n:
+        :return:
+        """
+        if not head:
+            return
+        if n <= 0:
+            return
+        dummy = ListNode(0)
+        dummy.next = head
+        fast = slow = dummy
+        count = 0
+        while count <= n and fast:
+            fast = fast.next
+            count += 1
+        while fast:
+            fast = fast.next
+            slow = slow.next
+        slow.next = slow.next.next
+        return dummy.next
