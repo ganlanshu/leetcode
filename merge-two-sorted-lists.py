@@ -95,4 +95,12 @@ class Solution(object):
         return self.mergeTwoLists(left_list, right_list)
 
     def mergeKLists2(self, lists):
-
+        if not lists:
+            return
+        k = len(lists)
+        step = 1
+        while step < k:
+            for i in range(0, k-step, 2*step):
+                lists[i] = self.mergeTwoLists1(lists[i], lists[i+step])
+            step *= 2
+        return lists[0]
