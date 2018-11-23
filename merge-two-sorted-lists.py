@@ -1,9 +1,6 @@
 #coding=utf-8
 # Definition for singly-linked list.
 
-"""
-21. Merge Two Sorted Lists
-"""
 
 class ListNode(object):
     def __init__(self, x):
@@ -13,6 +10,7 @@ class ListNode(object):
 class Solution(object):
     def mergeTwoLists(self, l1, l2):
         """
+        21. Merge Two Sorted Lists
         :type l1: ListNode
         :type l2: ListNode
         :rtype: ListNode
@@ -43,10 +41,6 @@ class Solution(object):
 
 
     def mergeTwoLists1(self, l1, l2):
-        if not l1:
-            return l2
-        if not l2:
-            return l1
         new_head = ListNode(0)
         current = new_head
         while l1 and l2:
@@ -62,4 +56,43 @@ class Solution(object):
         if l2:
             current.next = l2
         return new_head.next
+
+    def mergeKLists(self, lists):
+        """
+        23. Merge k Sorted Lists
+        :type lists: List[ListNode]
+        :rtype: ListNode
+        """
+        k = len(lists)
+        if not k:
+            return
+        if k == 1:
+            return lists[0]
+
+        def _merge_klists(l, r):
+            if l == r:
+                return lists[l]
+            mid = (l+r)/2
+            left_merged_list = _merge_klists(l, mid)
+            right_merged_list = _merge_klists(mid+1, r)
+            return self.mergeTwoLists1(left_merged_list, right_merged_list)
+        return _merge_klists(0, k-1)
+
+    def mergeKLists1(self, lists):
+        """
+        23. Merge k Sorted Lists
+        :type lists: List[ListNode]
+        :rtype: ListNode
+        """
+        k = len(lists)
+        if k == 0:
+            return
+        if k == 1:
+            return lists[0]
+        mid = k/2
+        left_list = self.mergeKLists(lists[:mid])
+        right_list = self.mergeKLists(lists[mid:])
+        return self.mergeTwoLists(left_list, right_list)
+
+    def mergeKLists2(self, lists):
 
