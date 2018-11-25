@@ -52,6 +52,7 @@ class LRUCache(object):
 # obj.put(key,value)
 
 from collections import OrderedDict
+
 class LRUCache1(object):
     """
     用ordereddict实现
@@ -90,7 +91,73 @@ class LRUCache1(object):
                 self.cache.popitem(last=False)
             self.cache[key] = value
 
+class DoubleLinkNode(object):
+    def __init__(self, key, val):
+        self.key = key
+        self.val = val
+        self.prev = None
+        self.next = None
 
+
+class LRUCache2(object):
+    """
+    用double linklist和dict实现
+    """
+
+    def __init__(self, capacity):
+        """
+        :type capacity: int
+        """
+        self.capacity = capacity
+        self.cache = {}
+        self.head = DoubleLinkNode(0, 0)
+        self.tail = DoubleLinkNode(0, 0)
+        self.head.next = self.tail
+        self.tail.prev = self.head
+
+    def get(self, key):
+        """
+        :type key: int
+        :rtype: int
+        """
+        if key in self.cache:
+            node = self.cache.get[key]
+            self._remove(node)
+            self.add(node)
+            return node.val
+        return -1
+
+    def put(self, key, value):
+        """
+        :type key: int
+        :type value: int
+        :rtype: void
+        """
+        node = DoubleLinkNode(key, value)
+        if key in self.cache:
+            self._remove(self.cache.get(key))
+        else:
+            if len(self.cache) == self.capacity:
+                n = self.head.next
+                self._remove(n)
+                del self.cache[n.key]
+        self._add(node)
+        self.cache[key] = node
+
+    def _remove(self, node):
+        # 从链表头删除多余的节点
+        p = node.prev
+        n = node.next
+        p.next = n
+        n.prev = p
+
+    def _add(self, node):
+        # 从链表尾部插入节点
+        p = self.tail.prev
+        p.next = node
+        self.tail.prev = node
+        node.prev = p
+        node.next = self.tail
 
 # Your LRUCache object will be instantiated and called as such:
 # obj = LRUCache(capacity)
