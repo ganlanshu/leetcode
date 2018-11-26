@@ -19,12 +19,12 @@ class Solution(object):
         nums_copy.sort()
         begin = 0
         end = n - 1
-        while begin < end:
+        while begin <= end:
             if nums[begin] == nums_copy[begin]:
                 begin += 1
             else:
                 break
-        while begin < end:
+        while begin <= end:
             if nums[end] == nums_copy[end]:
                 end -= 1
             else:

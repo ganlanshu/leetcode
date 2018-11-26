@@ -60,3 +60,22 @@ class Solution(object):
             slow = slow.next
             fast = fast.next.next
         return slow
+
+    def select_sort(self, aliast):
+        """
+        alist是list类型
+        :param aliast:
+        :return:
+        """
+        n = len(aliast)
+        for i in range(n-1):
+            small = aliast[i]
+            for j in range(i+1, n):
+                if aliast[j] < small:
+                    small = aliast[j]
+                    small_index = j
+            if small != aliast[i]:
+                aliast[i], aliast[small_index] = aliast[small_index], aliast[i]
+        return aliast
+
+
