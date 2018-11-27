@@ -63,3 +63,39 @@ class Solution(object):
             else:
                 count -= 1
         return candidate
+
+    def majorityElement4(self, nums):
+        """
+        题目改为找出出现超过 len(nums)/3 的元素
+        这样的元素最多有2个,每次从数组中找出3个不同的元素,删掉,剩下的就是
+        :param nums:
+        :return:
+        """
+        candidate1, count1 = None, 0
+        candidate2, count2 = None, 0
+        for num in nums:
+            if num == candidate1:
+                count1 += 1
+            elif num == candidate2:
+                count2 += 1
+            elif count1 == 0:
+                candidate1, count1 = num, 1
+            elif count2 == 0:
+                candidate2, count2 = num, 1
+            else:
+                count1 -= 1
+                count2 -= 1
+
+        count1 = count2 = 0
+        for num in nums:
+            if num == candidate1:
+                count1 += 1
+            elif num == candidate2:
+                count2 += 1
+        result = []
+        if count1 > len(nums)//3:
+            result.append(candidate1)
+        if count2 > len(nums)//3:
+            result.append(candidate2)
+        return result
+

@@ -39,7 +39,7 @@ class Solution(object):
 
     def find_duplicate3(self, nums):
         """
-        转化为linklist cycle的问题
+        转化为linklist cycle 环的入口问题
         :param nums:
         :return:
         """
@@ -56,4 +56,3 @@ class Solution(object):
             fast = nums[fast]
             slow = nums[slow]
         return fast
-
