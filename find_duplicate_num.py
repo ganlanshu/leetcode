@@ -36,3 +36,24 @@ class Solution(object):
         for i in range(1, n):
             if nums[i] == nums[i-1]:
                 return nums[i]
+
+    def find_duplicate3(self, nums):
+        """
+        转化为linklist cycle的问题
+        :param nums:
+        :return:
+        """
+        if len(nums) <= 1:
+            return
+        fast = slow = nums[0]
+        while True:
+            slow = nums[slow]
+            fast = nums[nums[fast]]
+            if slow == fast:
+                break
+        fast = nums[0]
+        while fast != slow:
+            fast = nums[fast]
+            slow = nums[slow]
+        return fast
+
