@@ -50,7 +50,7 @@ class Solution(object):
 
     def majorityElement4(self, nums):
         """
-        每次从数组中找出一对不同的元素，将它们从数组中删除，直到遍历完整个数组
+        每次从数组中找出一对不同的元素，将它们从数组中删除，直到遍历完整个数组, 剩下的就是majority element
         :param nums:
         :return:
         """

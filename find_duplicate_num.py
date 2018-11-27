@@ -25,7 +25,14 @@ class Solution(object):
                     return numbers[i]
         return numbers[0]
 
-    def find_duplicate(self, nums):
+    def find_duplicate1(self, nums):
         while nums[nums[0]] != nums[0]:
             nums[0],nums[nums[0]] = nums[nums[0]], nums[0]
         return nums[0]
+
+    def find_duplicate2(self, nums):
+        nums.sort()
+        n = len(nums)
+        for i in range(1, n):
+            if nums[i] == nums[i-1]:
+                return nums[i]
