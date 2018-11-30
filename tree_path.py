@@ -37,9 +37,7 @@ class Solution(object):
         if not root:
             return False
         if not root.left and not root.right:
-            if sum == root.val:
-                return True
-            return False
+            return root.val == sum
         if self.hasPathSum(root.left, sum-root.val) or self.hasPathSum(root.right, sum-root.val):
             return True
         return False
