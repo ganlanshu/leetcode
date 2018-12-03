@@ -20,10 +20,10 @@ class Solution(object):
         product_post[-1] = 1
         for i in range(n-2, -1, -1):
             product_post[i] = nums[i+1]*product_post[i+1]
-        output = []
+
         for i in range(n):
-            output.append(product_pre[i]*product_post[i])
-        return output
+            product_pre[i] = product_pre[i] * product_post[i]
+        return product_pre
 
 
 
