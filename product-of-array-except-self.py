@@ -27,7 +27,21 @@ class Solution(object):
 
 
 
+    def productExceptSelf1(self, nums):
+        n = len(nums)
+        # 先求前面元素的积
+        p = 1
+        result = []
+        for i in range(n):
+            result.append(p)
+            p *= nums[i]
 
+        # 直接在result上乘以从后面计算的积
+        right = 1
+        for i in range(n-1, -1, -1):
+            result[i] *= right
+            right = right * nums[i]
+        return result
 
 
 
