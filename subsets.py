@@ -44,3 +44,22 @@ class Solution(object):
 
         dfs([], 0)
         return res
+
+    def subsetsWithDup(self, nums):
+        """
+        90. Subsets II
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        if not nums:
+            return []
+        nums.sort()
+        n = len(nums)
+        result, current = [[nums[0]], []], [[nums[0]]]
+        for i in range(1, n):
+            if nums[i] == nums[i-1]:
+                current = [path+[nums[i]] for path in current]
+            else:
+                current = [path+[nums[i]] for path in result]
+            result += current
+        return result
