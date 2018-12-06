@@ -26,3 +26,22 @@ class Solution(object):
                 grid[i][j] = min(grid[i][j]+grid[i-1][j], grid[i][j]+grid[i][j-1])
         return grid[m-1][n-1]
 
+    def minPathSum1(self, grid):
+        """
+        不修改grid,用一个新的list保存每一行的结果
+        :param grid:
+        :return:
+        """
+        result = grid[0]
+        n = len(result)
+        for i in range(1, n):
+            result[i] += result[i-1]
+        m = len(grid)
+        for i in range(1, m):
+            for j in range(n):
+                if j == 0:
+                    result[j] += grid[i][j]
+                else:
+                    result[j] = min(grid[i][j]+result[j], grid[i][j]+result[j-1])
+        return result[n-1]
+
