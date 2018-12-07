@@ -8,6 +8,23 @@ you need to find the total number of continuous subarrays whose sum equals to k.
 
 class Solution(object):
 
+    def subarraySum(self, nums, k):
+        """
+        brute force,最初想到的方法
+        :param nums:
+        :param k:
+        :return:
+        """
+        n = len(nums)
+        count = 0
+        for i in range(n):
+            sum = 0
+            for j in range(i, n):
+                sum += nums[j]
+                if sum == k:
+                    count += 1
+        return count
+
     def subarraySum1(self, nums, k):
         """
         看了提示想到的,与2sum问题很相似
