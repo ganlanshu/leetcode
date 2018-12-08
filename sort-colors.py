@@ -42,5 +42,30 @@ class Solution(object):
             elif nums[i] == 2:
                 nums[i], nums[blue] = nums[blue], nums[i]
                 blue -= 1
-            elif nums[i] == 1:
+            else:
                 i += 1
+
+    def sortColors2(self, nums):
+        """
+        参考discuss里的方法
+        https://leetcode.com/problems/sort-colors/discuss/26479/AC-Python-in-place-one-pass-solution-O(n)-time-O(1)-space-no-swap-no-count
+        把0, 1, 2 分别放到合适的位置
+        [o,red), [red, whilte), [white, len(nums))
+        先把所有位置都设置为2,再把小于2(0和1)的值都设置为1,这样2就越来越靠后,1 次之
+        最后把剩下的0放最左边
+        :param nums:
+        :return:
+        """
+        red = white = 0
+        n = len(nums)
+        for blue in range(n):
+            value = nums[blue]
+            if value == 2:
+                continue
+            nums[blue] = 2
+            if value < 2:
+                nums[white] = 1
+                white += 1
+            if value == 0:
+                nums[red] = 0
+                red += 1
