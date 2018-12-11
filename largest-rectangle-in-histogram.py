@@ -41,3 +41,23 @@ class Solution(object):
                 min_height = min(heights[j], min_height)
                 max_area = max(max_area, min_height*(i-j+1))
         return max_area
+
+    def largestRectangleArea2(self, heights):
+        heights.append(0)
+        n = len(heights)
+        stack = []
+        max_area = 0
+        i = 0
+        while i < n:
+            if not stack or heights[stack[-1]] <= heights[i]:
+                stack.append(i)
+                i += 1
+            else:
+                top = stack.pop()
+                if stack:
+                    width = i-stack[-1]-1
+                else:
+                    width = i
+                max_area = max(max_area, heights[top]*width)
+        return max_area
+
