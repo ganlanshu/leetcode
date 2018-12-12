@@ -34,7 +34,6 @@ class Solution(object):
         # 把nums放到set里,这样查找是用hash,更快
         if not nums:
             return 0
-        current_count = 1
         longest_steak = 1
         num_set = set(nums)
         for elem in num_set:
