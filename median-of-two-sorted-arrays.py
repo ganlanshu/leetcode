@@ -34,7 +34,7 @@ class Solution(object):
         if n%2: #  为奇数
             return merged_list[n//2]
         else:
-
+            return float(merged_list[n//2]+merged_list[n//2-1])/2
 
 
 
