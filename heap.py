@@ -51,11 +51,13 @@ class Heap(object):
             if self.heap_list[i] > self.heap_list[min_index]:
                 self.heap_list[i], self.heap_list[min_index] = self.heap_list[min_index], self.heap_list[i]
                 i = min_index
+            else:
+                break
 
     def build_heap(self, alist):
         """
         利用数组alist里的多个元素,组成一个最小堆
-        从第一个非叶子节点开始,也就是i//2, 每个节点下沉,把最小值往上浮,知道根节点为止
+        从第一个非叶子节点开始,也就是i//2, 每个节点下沉,把最小值往上浮,直到根节点为止
         :param alist:
         :return:
         """
@@ -65,3 +67,58 @@ class Heap(object):
         while i > 0:
             self.perc_down(i)
             i -= 1
+
+
+"""
+下面的堆索引从0开始
+iparent = index
+i_left = index*2+1
+i_right = index*2+2
+"""
+
+def swap(array, i, j):
+    array[i], array[j] = array[j], array[i]
+
+def build_max_heapify(array):
+    # 把一个数组变成最大堆
+    # 按照数组原样画一个完全二叉树出来,从第一个非叶子节点i开始,以i为根节点,构建max_heap
+    n = len(array)
+    # 第一个非叶子节点
+    i_parent = n//2-1
+    while i_parent >= 0:
+        max_heapify(array, i_parent, n)
+        i_parent -= 1
+
+
+def max_heapify(array, index, heapsize):
+    # 把节点index为根的堆变成最大堆
+    while 2*index+1 < heapsize:
+        i_left = 2*index+1
+        i_right = i_left+1
+        if i_right >= heapsize:
+            max_index = i_left
+        else:
+            if array[i_left] < array[i_right]:
+                max_index = i_right
+            else:
+                max_index = i_left
+        if array[index] < array[max_index]:
+            swap(array, index, max_index)
+            index = max_index
+        else:
+            break
+
+
+def heap_sort(alist):
+    heapsize = len(alist)
+    build_max_heapify(alist)
+    # 再把alist最后一个元素之外的列表设为最大堆
+    for i in range(heapsize-1, 0, -1):
+        # 把最大堆的最大值放到alist末尾
+        swap(alist, 0, i)
+        max_heapify(alist, 0, i)
+
+if __name__ == '__main__':
+    alist = [2,3,10,4,20,21,0,-1]
+    heap_sort(alist)
+    print alist
