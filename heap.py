@@ -51,3 +51,17 @@ class Heap(object):
             if self.heap_list[i] > self.heap_list[min_index]:
                 self.heap_list[i], self.heap_list[min_index] = self.heap_list[min_index], self.heap_list[i]
                 i = min_index
+
+    def build_heap(self, alist):
+        """
+        利用数组alist里的多个元素,组成一个最小堆
+        从第一个非叶子节点开始,也就是i//2, 每个节点下沉,把最小值往上浮,知道根节点为止
+        :param alist:
+        :return:
+        """
+        self.current_size = len(alist)
+        self.heap_list = [0] + alist[:]
+        i = len(alist)//2
+        while i > 0:
+            self.perc_down(i)
+            i -= 1
