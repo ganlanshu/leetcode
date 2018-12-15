@@ -78,4 +78,35 @@ class Solution(object):
                 aliast[i], aliast[small_index] = aliast[small_index], aliast[i]
         return aliast
 
+    def quick_sort(self, alist, low, high):
+        """
+        :param alist:
+        :return:
+        """
+        if low < high:
+            partion = self.partion(alist, low, high)
+            self.quick_sort(alist, low, partion-1)
+            self.quick_sort(alist, partion+1, high)
+
+    def partion(self, alist, low, high):
+        pivot = alist[low]
+        location = low
+        while low < high:
+            while high > low and alist[high] >= pivot:
+                high -= 1
+            while low < high and alist[low] <= pivot:
+                low += 1
+            if low < high:
+                alist[low], alist[high] = alist[high], alist[low]
+        alist[location], alist[low] = alist[low], alist[location]
+        return low
+
+if __name__ == '__main__':
+    s = Solution()
+    alist = [6,1,2,7,9,3,4,5,10,8]
+    alist = [1,2,3,4,5,6,7,8,9,10]
+    s.quick_sort(alist, 0, len(alist)-1)
+    print alist
+
+
 

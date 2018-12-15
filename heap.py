@@ -122,3 +122,5 @@ if __name__ == '__main__':
     alist = [2,3,10,4,20,21,0,-1]
     heap_sort(alist)
     print alist
+    import heapq
+    print heapq.nlargest(2, alist)
