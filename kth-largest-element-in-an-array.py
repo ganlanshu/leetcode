@@ -55,9 +55,37 @@ class Solution(object):
 
     def findKthLargest3(self, nums, k):
         """
-        使用快排的思想
+        使用快排的思想, 从大到小排序
         :param nums:
         :param k:
         :return:
         """
-        pass
+        if k > len(nums):
+            return -1
+        high = len(nums)-1
+        low = 0
+        partion = self.partion(nums, low, high)
+        if k-1 == partion:
+            return nums[partion]
+        if k-1 > partion:
+            k -= partion+1
+            return self.findKthLargest3(nums[partion+1:], k)
+        else:
+            return self.findKthLargest3(nums[:partion], k)
+
+    def partion(self, nums, low, high):
+        pivot = nums[low]
+        low_index = low
+        while low < high:
+            while high > low and nums[high] <= pivot:
+                high -= 1
+            while low < high and nums[low] >= pivot:
+                low += 1
+            if low < high:
+                nums[low], nums[high] = nums[high], nums[low]
+        nums[low_index], nums[low] = nums[low], nums[low_index]
+        return low
+
+
+
+
