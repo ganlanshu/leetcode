@@ -101,12 +101,40 @@ class Solution(object):
         alist[location], alist[low] = alist[low], alist[location]
         return low
 
+    def merge_sort1(self, alist):
+        """
+        对数组alist归并排序
+        :param alist:
+        :return:
+        """
+        if len(alist) <= 1:
+            return alist
+        mid = len(alist)//2
+        left_half = self.merge_sort1(alist[:mid])
+        right_half = self.merge_sort1(alist[mid:])
+        return self.merge1(left_half, right_half)
+
+    def merge1(self, left, right):
+        result = []
+        left_length = len(left)
+        right_length = len(right)
+        i = j = 0
+        while i < left_length and j < right_length:
+            if left[i] < right[j]:
+                result.append(left[i])
+                i += 1
+            else:
+                result.append(right[j])
+                j += 1
+        result.extend(left[i:])
+        result.extend(right[j:])
+        return result
+
+
 if __name__ == '__main__':
     s = Solution()
     alist = [6,1,2,7,9,3,4,5,10,8]
-    alist = [1,2,3,4,5,6,7,8,9,10]
-    s.quick_sort(alist, 0, len(alist)-1)
+    print s.merge_sort1(alist)
     print alist
-
-
+    #s.quick_sort(alist, 0, len(alist)-1)
 
