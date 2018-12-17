@@ -86,6 +86,22 @@ class Solution(object):
         nums[low_index], nums[low] = nums[low], nums[low_index]
         return low
 
-
-
-
+    def findKthLargest4(self, nums, k):
+        """
+        还利用快排的思想,但是不用递归了
+        :param nums:
+        :param k:
+        :return:
+        """
+        if k > len(nums):
+            return -1
+        high = len(nums)-1
+        low = 0
+        while True:
+            partion = self.partion(nums, low, high)
+            if k-1 == partion:
+                return nums[partion]
+            if k-1 > partion:
+                low = partion+1
+            else:
+                high = partion-1
