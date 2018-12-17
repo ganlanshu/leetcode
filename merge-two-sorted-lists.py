@@ -104,3 +104,20 @@ class Solution(object):
                 lists[i] = self.mergeTwoLists1(lists[i], lists[i+step])
             step *= 2
         return lists[0]
+
+    def mergeKLists3(self, lists):
+        import heapq
+        root = ListNode(0)
+        dummy = root
+        heap = []
+        for l in lists:
+            if l:
+                heapq.heappush(heap, (l.val, l))
+        while heap:
+            val, node = heapq.heappop(heap)
+            dummy.next = node
+            dummy = dummy.next
+            if node.next:
+                node = node.next
+                heapq.heappush(heap, (node.val, node))
+        return root.next
