@@ -20,3 +20,17 @@ class Solution(object):
             else:
                 return False
         return num == 1
+
+    def isUgly1(self, num):
+        """
+        从讨论区看到的方法
+        :param num:
+        :return:
+        """
+        if num <= 0:
+            return False
+        for x in [2, 3, 5]:
+            while num % x == 0:
+                num = num / x
+        return num == 1
+
