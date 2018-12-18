@@ -105,3 +105,11 @@ class Solution(object):
                 low = partion+1
             else:
                 high = partion-1
+
+    def findKthSmallest(self, nums, k):
+        import heapq
+        heapq.heapify(nums)
+        res = []
+        for i in range(k):
+            res.append(heapq.heappop(nums))
+        return res
