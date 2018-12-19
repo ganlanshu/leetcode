@@ -73,6 +73,28 @@ class Solution(object):
                 number += 1
         return number-1
 
+    def __init__(self):
+        """
+        根据题目,n最大是1690, 把n个丑数都算出来,存到一个列表,后面调用的时候,直接从list里面取
+        :param ugly_list:
+        :return:
+        """
+        n = 1690
+        ugly_num = [1]*n
+        two_index = three_index = five_index = 0
+        for i in range(1, n):
+            ugly_num[i] = min(ugly_num[two_index]*2, ugly_num[three_index]*3, ugly_num[five_index]*5)
+            if ugly_num[i] == ugly_num[two_index]*2:
+                two_index += 1
+            if ugly_num[i] == ugly_num[three_index]*3:
+                three_index += 1
+            if ugly_num[i] == ugly_num[five_index]*5:
+                five_index += 1
+        self.ugly_list = ugly_num
+
+    def nthUglyNumber2(self, n):
+        return self.ugly_list[n-1]
+
     def nthUglyNumber1(self, n):
         """
         看了提示想出来的,每一个丑数都是一个更小的丑数的2,3,5倍,
@@ -95,4 +117,23 @@ class Solution(object):
                 five_index += 1
         return ugly_num[n-1]
 
+
+    def nthUglyNumber3(self, n):
+        """
+        用min_heap来做,把当前丑数的2,3,5倍去除重复的,放入最小堆,再出堆n次
+        :param n:
+        :return:
+        """
+        import heapq
+        ugly_num = []
+        min_heap = [1]
+        pool = set()
+        while len(ugly_num) < n:
+            num = heapq.heappop(min_heap)
+            ugly_num.append(num)
+            for i in [2, 3, 5]:
+                if num*i not in pool:
+                    pool.add(num*i)
+                    heapq.heappush(min_heap, num*i)
+        return ugly_num[n-1]
 
