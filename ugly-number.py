@@ -73,3 +73,26 @@ class Solution(object):
                 number += 1
         return number-1
 
+    def nthUglyNumber1(self, n):
+        """
+        看了提示想出来的,每一个丑数都是一个更小的丑数的2,3,5倍,
+        维护含有n个丑数的list,[1,2,3,4,5,6,8...]
+        two_index,three_index,five_index 都从0开始
+        是更小丑数的2倍,two_index递增,是3倍,则three_index后移,5倍则five_index后移
+        最后index为n-1的元素是要求的丑数
+        :param n:
+        :return:
+        """
+        ugly_num = [1]*n
+        two_index = three_index = five_index = 0
+        for i in range(1, n):
+            ugly_num[i] = min(ugly_num[two_index]*2, ugly_num[three_index]*3, ugly_num[five_index]*5)
+            if ugly_num[i] == ugly_num[two_index]*2:
+                two_index += 1
+            if ugly_num[i] == ugly_num[three_index]*3:
+                three_index += 1
+            if ugly_num[i] == ugly_num[five_index]*5:
+                five_index += 1
+        return ugly_num[n-1]
+
+
