@@ -29,3 +29,17 @@ class Solution(object):
         even.next = None
         odd.next = first_even
         return head
+
+    def oddEvenList1(self, head):
+        if not (head and head.next):
+            return head
+        odd = head
+        first_even = even = head.next
+        while even and even.next:
+            odd.next = even.next
+            odd = even.next
+            even.next = odd.next
+            even = odd.next
+        odd.next = first_even
+        return head
+
