@@ -130,11 +130,24 @@ class Solution(object):
         result.extend(right[j:])
         return result
 
+    def merge_sort2(self, alist):
+        def _merge_sort2(alist, start, end):
+            if start == end:
+                return [alist[start]]
+            else:
+                mid = (start+end)//2
+                left = _merge_sort2(alist, start, mid)
+                right = _merge_sort2(alist, mid+1, end)
+                return self.merge1(left, right)
+        if not alist:
+            return []
+        return _merge_sort2(alist, 0, len(alist)-1)
+
 
 if __name__ == '__main__':
     s = Solution()
     alist = [6,1,2,7,9,3,4,5,10,8]
-    print s.merge_sort1(alist)
-    print alist
+    alist = []
+    print s.merge_sort2(alist)
     #s.quick_sort(alist, 0, len(alist)-1)
 

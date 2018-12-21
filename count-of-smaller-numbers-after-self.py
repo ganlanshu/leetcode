@@ -48,3 +48,24 @@ class Solution(object):
             binary_list.insert(low, k)
             res[i] = low
         return res
+
+    def countSmaller2(self, nums):
+
+        def sort(enum):
+            half = len(enum)//2
+            if half:
+                left, right = sort(enum[:half]), sort(enum[half:])
+                i = j = 0
+                m, n = len(left), len(right)
+                while i < m or j < n:
+                    if j == n or i < m and left[i][1] <= right[j][1]:
+                        enum[i+j] = left[i]
+                        smaller[left[i]] += j
+                        i += 1
+                    else:
+                        enum[i+j] = right[j]
+            return enum
+
+        smaller = [0]*len(nums)
+        sort(list(enumerate(nums)))
+        return smaller
