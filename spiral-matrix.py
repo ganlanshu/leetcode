@@ -31,9 +31,11 @@ class Solution(object):
             for row in range(i+1, m-i):
                 res.append(matrix[row][n-1-i])
             # 从右到左
-            for col in range(n-2-i, i-1, -1):
-                res.append(matrix[m-1-i][col])
+            if i < m-1-i:
+                for col in range(n-2-i, i-1, -1):
+                    res.append(matrix[m-1-i][col])
             # 从下到上
-            for row in range(m-2-i, i, -1):
-                res.append(matrix[row][i])
+            if i< n-1-i:
+                for row in range(m-2-i, i, -1):
+                    res.append(matrix[row][i])
         return res
