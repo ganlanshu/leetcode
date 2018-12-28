@@ -69,10 +69,10 @@ class MinStack1(object):
         :rtype: void
         """
         if not self.stack:
-            self.stack.push(0)
+            self.stack.append(0)
             self.min = x
         else:
-            self.stack.push(x-self.min)
+            self.stack.append(x-self.min)
             self.min = min(x, self.min)
 
     def pop(self):
