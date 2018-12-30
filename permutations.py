@@ -17,22 +17,22 @@ class Solution(object):
         if len(nums) == 1:
             return [nums]
         n = len(nums)
-        re = self.permute(nums[1:])
-        result = [[nums[0]] + r for r in re]
-        for i in range(1, n):
-            nums[i], nums[0] = nums[0], nums[i]
-            re = self.permute(nums[1:])
-            result.extend([[nums[0]]+r for r in re])
+        result = []
+        for i in range(n):
+            re = self.permute(nums[:i]+nums[i+1:])
+            result.extend([[nums[i]]+r for r in re])
         return result
 
+    def permute1(self, nums):
+        res = []
 
-
-
-
-
-
-
-
+        def _permute(nums, path):
+            if not nums:
+                res.append(path)
+            for i in range(len(nums)):
+                _permute(nums[:i]+nums[i+1:], path+[nums[i]])
+        _permute(nums, [])
+        return res
 
 
 
