@@ -37,6 +37,19 @@ class Solution(object):
             return True
         return False
 
+    def rotateString2(self, A, B):
+        return len(A) == len(B) and B in A+A
+
+    def rotateString2(self, A, B):
+        if A == B:
+            return True
+        for i in range(len(A)):
+            # 每次左移一位,这样会改变A的值
+            A = A[1:] + A[0]
+            if A == B:
+                return True
+        return False
+
     def LeftRotateString(self, s, n):
         """
         字符串左移n位
