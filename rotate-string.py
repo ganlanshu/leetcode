@@ -4,6 +4,7 @@
 """
 
 class Solution(object):
+
     def rotateString(self, A, B):
         """
         :type A: str
@@ -21,10 +22,7 @@ class Solution(object):
                 return True
         return False
 
-
-class Solution(object):
-
-    def rotateString(self, A, B):
+    def rotateString1(self, A, B):
         """
         :type A: str
         :type B: str
@@ -39,3 +37,15 @@ class Solution(object):
             return True
         return False
 
+    def LeftRotateString(self, s, n):
+        """
+        字符串左移n位
+        :param s:
+        :param n:
+        :return:
+        """
+        if not s:
+            return s
+        N = len(s)
+        n = n%N
+        return s[n:] + s[:n]
