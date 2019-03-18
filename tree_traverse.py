@@ -236,3 +236,26 @@ class Solution(object):
                 level.append(head.val)
             res.appendleft(level)
         return res
+
+
+    def postorderTraversal(self, root):
+        if not root:
+            return []
+        return self.postorderTraversal(root.left) + self.postorderTraversal(root.right) + [root.val]
+
+    def postorder_traverse_iter(self, root):
+        if not root:
+            return []
+        stack = [root]
+        res = []
+        # 先找出后序遍历的逆序，存在res，再进行reverse操作
+        while stack:
+            top = stack.pop()
+            res.append(top.val)
+            if top.left:
+                stack.append(top.left)
+            if top.right:
+                stack.append(top.right)
+        res.reverse()
+        return res
+
