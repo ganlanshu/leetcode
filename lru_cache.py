@@ -121,7 +121,7 @@ class LRUCache2(object):
         :rtype: int
         """
         if key in self.cache:
-            node = self.cache.get[key]
+            node = self.cache.get(key)
             self._remove(node)
             self.add(node)
             return node.val
