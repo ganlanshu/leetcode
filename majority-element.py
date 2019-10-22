@@ -99,3 +99,22 @@ class Solution(object):
             result.append(candidate2)
         return result
 
+    def majority_element5(self, nums):
+        """
+        看nums数组的每一个位是0还是1，对于整数来说，统计32个位上每个位出现1和0的次数，一定有一个次数大一些，就是这个bit众数的这个
+        bit上一定是出现次数多的（0或1），最后把bit转化成十进制数字
+        :param nums:
+        :return:
+        """
+        result = 0
+        for i in range(32):
+            zeros = ones = 0
+            for num in nums:
+                if num & (1 << i) != 0:
+                    ones += 1
+                else:
+                    zeros += 1
+            if ones > zeros:
+                result |= (1 << i)
+        return result
+
