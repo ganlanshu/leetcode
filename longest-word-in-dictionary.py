@@ -20,5 +20,4 @@ class Solution(object):
                 return word
         return ans
 
-    def longest_word(self, words):
 
