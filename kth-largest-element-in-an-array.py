@@ -106,6 +106,41 @@ class Solution(object):
             else:
                 high = partion-1
 
+    def findKthLargest5(self, nums, k):
+        """
+        第k大就是第n+1-k小
+        :param nums:
+        :param k:
+        :return:
+        """
+        import random
+        random.shuffle(nums)
+        k = len(nums) - k
+        low = 0
+        high = len(nums)-1
+
+        while True:
+            partion = self.partion1(nums, low, high)
+            if k == partion:
+                return nums[k]
+            if k > partion:
+                low = k + 1
+            else:
+                high = k - 1
+
+    def partion1(self, nums, low, high):
+        low_index = low
+        pivot = nums[low]
+        while low < high:
+            while high > low and nums[high] > pivot:
+                high -= 1
+            while low < high and nums[low] <= pivot:
+                low += 1
+            if low != high:
+                nums[low], nums[high] = nums[high], nums[low]
+        nums[low_index], nums[low] = nums[low], nums[low_index]
+        return low
+
     def findKthSmallest(self, nums, k):
         import heapq
         heapq.heapify(nums)
