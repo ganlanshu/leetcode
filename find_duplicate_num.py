@@ -1,4 +1,5 @@
-#coding=utf-8
+# coding=utf-8
+
 """
 287. Find the Duplicate Number
 You must not modify the array (assume the array is read only).
@@ -6,6 +7,7 @@ You must use only constant, O(1) extra space.
 Your runtime complexity should be less than O(n2).
 There is only one duplicate number in the array, but it could be repeated more than once.
 """
+
 
 class Solution(object):
 
@@ -20,14 +22,14 @@ class Solution(object):
         for i in range(1, n):
             while numbers[i] != i:
                 if numbers[i] != numbers[numbers[i]]:
-                    numbers[i], numbers[numbers[i]] = numbers[numbers[i]], numbers[i]
+                    nums[nums[i]], nums[i] = nums[i], nums[nums[i]]
                 else:
                     return numbers[i]
         return numbers[0]
 
     def find_duplicate1(self, nums):
         while nums[nums[0]] != nums[0]:
-            nums[0],nums[nums[0]] = nums[nums[0]], nums[0]
+            nums[nums[0]], nums[0] = nums[0], nums[nums[0]]
         return nums[0]
 
     def find_duplicate2(self, nums):
@@ -56,3 +58,11 @@ class Solution(object):
             fast = nums[fast]
             slow = nums[slow]
         return fast
+
+
+if __name__ == '__main__':
+    s = Solution()
+    nums = [1, 3, 4, 2, 2]
+    print(nums)
+    d = s.find_duplicate(nums)
+    print(d)
