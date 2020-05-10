@@ -28,6 +28,8 @@ class MyQueue(object):
         Removes the element from in front of queue and returns that element.
         :rtype: int
         """
+        if not self.value:
+            return
         s = []
         while len(self.value) > 1:
             s.append(self.value.pop())
@@ -56,6 +58,33 @@ class MyQueue(object):
         """
         return self.value == []
 
+
+class MyQueue1(object):
+    """
+    看了讨论区其他解法，觉得初始化用2个栈更方便，如果有连续的pop操作效率更高，不需要重新push到原来的栈
+    """
+
+    def __init__(self):
+        self.stack1 = []
+        self.stack2 = []
+
+    def push(self, x):
+        self.stack1.append(x)
+
+    def pop(self):
+        self.peek()
+        return self.stack2.pop()
+
+    def peek(self):
+        if self.empty():
+            return
+        if not self.stack2:
+            while self.stack1:
+                self.stack2.append(self.stack1.pop())
+        return self.stack2[-1]
+
+    def empty(self):
+        return not self.stack1 and self.stack2
 
 # Your MyQueue object will be instantiated and called as such:
 # obj = MyQueue()
