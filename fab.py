@@ -1,5 +1,6 @@
 #coding=utf-8
 
+
 def fibonacci(n):
     """
     最简单的先用递归
@@ -13,19 +14,18 @@ def fibonacci(n):
     else:
         return fibonacci(n-1) + fibonacci(n-2)
 
+
 def fibonacci_with_iter(n):
     """
     每次递归没有存下来之前已经算出来的结果,浪费很多次计算,下面把每次的结果存在一个列表里
     :param n:
     :return:
     """
-    result = []
-    result.append(0)
-    result.append(1)
-    if n >= 2:
-        for i in range(2, n+1):
-            result.append(result[i-1] + result[i-2])
-    return result
+    result = [0, 1]
+    for i in range(2, n+1):
+        result.append(result[i-1] + result[i-2])
+    return result[n]
+
 
 def fibonacci3(n):
     """
@@ -33,10 +33,8 @@ def fibonacci3(n):
     :param n:
     :return:
     """
-    if n == 0:
-        return 0
-    if n == 1:
-        return 1
+    if n < 2:
+        return n
     f0, f1 = 0, 1
     for i in range(2, n+1):
         fn = f0 + f1
@@ -44,6 +42,15 @@ def fibonacci3(n):
         f1 = fn
     return fn
 
+
+def fibonacci4(n):
+    # 对上面方法的优化，减少对n的判断
+    a, b = 0, 1
+    for i in range(n):
+        a, b = b, a+b
+    return a
+
+
 if __name__ == '__main__':
-    print fibonacci3(10)
-    print fibonacci_with_iter(10)
+    print(fibonacci3(10))
+    print(fibonacci_with_iter(10))
