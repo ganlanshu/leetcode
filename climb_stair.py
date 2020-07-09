@@ -1,8 +1,12 @@
 #coding=utf-8
+import math
+
 """
 70. Climbing Stairs
 
 """
+
+
 class Solution(object):
     def climbStairs(self, n):
         """
@@ -13,7 +17,7 @@ class Solution(object):
             return 1
         if n == 2:
             return 2
-        f0, f1 =  1, 2
+        f0, f1 = 1, 2
         for i in range(2, n):
             fn = f0 + f1
             f0 = f1
